@@ -13,7 +13,7 @@ router.get("/:customerId", isValidId, ctrl.getById);
 
 router.post("/", validateBody(schemas.addSchema), ctrl.add);
 router.put("/:customerId", isValidId, validateBody(schemas.addSchema), ctrl.updateById);
-router.patch("/:customerId/favorite", isValidId, validateBody(schemas.updateFavoriteSchema), ctrl.updateFavorite);
+// router.patch("/:customerId/favorite", isValidId, validateBody(schemas.updateFavoriteSchema), ctrl.updateFavorite);
 
 router.delete("/:customerId", isValidId, ctrl.deleteById);
 
