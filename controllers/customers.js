@@ -2,22 +2,28 @@ const { Customer } = require("../models/customer");
 const { HttpError, ctrlWrapper } = require("../helpers");
 
 const getAll = async (req, res, next) => {
-  const { _id: owner } = req.user;
+  // const { _id: owner } = req.user;
+
   // const { page = 1, limit = 20, favorite } = req.query;
   // const skip = (page - 1) * limit;
-  const filterFavorite = { owner };
+
+  // const filterFavorite = { owner };
+
   // if (favorite !== undefined) {
   //   filterFavorite.favorite = favorite;
   // }
   const result = await Customer.find(
-    filterFavorite, 
-    "-createdAt -updatedAt",
+  //   filterFavorite, 
+  //   "-createdAt -updatedAt",
   //  {
   //   skip,
   //   limit,
   // }
   )
-  .populate("owner", "name email");
+  // .populate("owner", "name email");
+  // res.json(result);
+
+  .populate("name email");
   res.json(result);
 };
 
