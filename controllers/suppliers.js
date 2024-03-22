@@ -1,8 +1,8 @@
-const { Customer } = require("../models/customer");
+const { Supplier } = require("../models/supplier");
 const { HttpError, ctrlWrapper } = require("../helpers");
 
 const getAll = async (req, res, next) => {
-  const { _id: owner } = req.user;
+  // const { _id: owner } = req.user;
 
   // const { page = 1, limit = 20, favorite } = req.query;
   // const skip = (page - 1) * limit;
@@ -12,11 +12,9 @@ const getAll = async (req, res, next) => {
   // if (favorite !== undefined) {
   //   filterFavorite.favorite = favorite;
   // }
-  const recentCustomers = await Customer.find().limit(5).sort({createdAt: -1})
-  const total = await Customer.countDocuments();
-  const customers = await Customer.find( {owner},
+  const result = await Supplier.find(
   //   filterFavorite, 
-    "-createdAt -updatedAt",
+  //   "-createdAt -updatedAt",
   //  {
   //   skip,
   //   limit,
@@ -25,14 +23,14 @@ const getAll = async (req, res, next) => {
   // .populate("owner", "name email");
   // res.json(result);
 
-  .populate("owner", "name email");
-  res.json({customers, recentCustomers, total});
+  .populate("name");
+  res.json(result);
 };
 
 const getById = async (req, res, next) => {
-  const { customerId } = req.params;
+  const { supplierId } = req.params;
   // const result = await Customer.findOne({_id:id});
-  const result = await Customer.findById(customerId);
+  const result = await Supplier.findById(supplierId);
   if (!result) {
     throw HttpError(404, "Not found");
   }
@@ -41,13 +39,13 @@ const getById = async (req, res, next) => {
 
 const add = async (req, res, next) => {
   const { _id: owner } = req.user;
-  const result = await Customer.create({ ...req.body, owner });
+  const result = await Supplier.create({ ...req.body, owner });
   res.status(201).json(result);
 };
 
 const updateById = async (req, res, next) => {
-  const { customerId } = req.params;
-  const result = await Customer.findByIdAndUpdate(customerId, req.body, {
+  const { supplierId } = req.params;
+  const result = await Supplier.findByIdAndUpdate(supplierId, req.body, {
     new: true,
   });
   if (!result) {
@@ -68,12 +66,12 @@ const updateById = async (req, res, next) => {
 // };
 
 const deleteById = async (req, res, next) => {
-  const { customerId } = req.params;
-  const result = await Customer.findByIdAndRemove(customerId);
+  const { supplierId } = req.params;
+  const result = await Supplier.findByIdAndRemove(supplierId);
   if (!result) {
     throw HttpError(404, "Not found");
   }
-  res.status(200).json({ message: "customer deleted" });
+  res.status(200).json({ message: "supplier deleted" });
 };
 
 module.exports = {

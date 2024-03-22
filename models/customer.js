@@ -11,14 +11,14 @@ const customerSchema = new Schema(
     },
     name: {
       type: String,
-      required: [true, "Set name for customer"],
+      // required: [true, "Set name for customer"],
     },
     email: {
       type: String,
     },
     spent: {
-        type: String,
-      },
+      type: String,
+    },
     // phone: {
     //   type: String,
     // },
@@ -27,11 +27,11 @@ const customerSchema = new Schema(
     //   default: false,
     // },
 
-    // owner: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "user",
-    //   required: true,
-    // }
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );

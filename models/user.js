@@ -25,11 +25,11 @@ const userSchema = new Schema(
       minlength: 6,
       required: true,
     },
-    subscription: {
-      type: String,
-      enum: allowedSubscriptions,
-      default: "starter",
-    },
+    // subscription: {
+    //   type: String,
+    //   enum: allowedSubscriptions,
+    //   default: "starter",
+    // },
     token: {
       type: String,
       default: "",
@@ -38,14 +38,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    verify: {
-      type: Boolean,
-      default: false,
-    },
-    verificationCode: {
-      type: String,
-      defaul: "",
-    }
+    // verify: {
+    //   type: Boolean,
+    //   default: false,
+    // },
+    // verificationCode: {
+    //   type: String,
+    //   defaul: "",
+    // }
   },
   { versionKey: false, timestamps: true }
 );

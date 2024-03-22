@@ -1,10 +1,18 @@
 const express = require("express");
 const logger = require("morgan");
+// const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
+// ------------
+const helmet = require("helmet");
+const bodyParser = require("body-parser");
+// ------------
 
 const authRouter = require("./routes/api/auth");
 const customersRouter = require("./routes/api/customers");
+const productsRouter = require("./routes/api/products");
+const suppliersRouter = require("./routes/api/suppliers");
+// const overallStatRouter = require("./routes/api/overallStat");
 
 const app = express();
 
@@ -15,8 +23,19 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
+// =======
+// app.use(morgan("common"));
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+// =======
+
 app.use("/api/auth", authRouter);
 app.use("/api/customers", customersRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/suppliers", suppliersRouter);
+// app.use("/api/overallStatRouter", overallStatRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });

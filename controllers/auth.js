@@ -104,14 +104,14 @@ const login = async (req, res) => {
   const payload = {
     id: user._id,
   };
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "48h" });
   await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
     token,
     user: {
       "email": user.email,
-      "subscription": user.subscription
+      // "subscription": user.subscription
     }
   });
 };
@@ -134,19 +134,19 @@ const logout = async (req, res) => {
   });
 };
 
-const updateSubscription = async (req, res) => {
-  const { _id, name, subscription } = req.user;
-  const result = await User.findByIdAndUpdate(_id, req.body, {
-    new: true,
-  });
-  if (!result) {
-    throw HttpError(404);
-  }
-  res.json({
-    name,
-    subscription,
-  });
-};
+// const updateSubscription = async (req, res) => {
+//   const { _id, name, subscription } = req.user;
+//   const result = await User.findByIdAndUpdate(_id, req.body, {
+//     new: true,
+//   });
+//   if (!result) {
+//     throw HttpError(404);
+//   }
+//   res.json({
+//     name,
+//     subscription,
+//   });
+// };
 
 const updateAvatar = async (req, res) => {
   const { _id } = req.user;
@@ -178,6 +178,6 @@ module.exports = {
   login: ctrlWrapper(login),
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
-  updateSubscription: ctrlWrapper(updateSubscription),
+  // updateSubscription: ctrlWrapper(updateSubscription),
   updateAvatar: ctrlWrapper(updateAvatar),
 };
