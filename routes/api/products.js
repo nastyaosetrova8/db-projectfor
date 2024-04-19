@@ -22,7 +22,6 @@ router.patch(
   validateBody(schemas.addSchema),
   ctrl.updateById
 );
-// router.patch("/:customerId/favorite", isValidId, validateBody(schemas.updateFavoriteSchema), ctrl.updateFavorite);
 
 router.delete("/:productId", isValidIdProduct, ctrl.deleteById);
 

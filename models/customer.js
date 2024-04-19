@@ -19,14 +19,6 @@ const customerSchema = new Schema(
     spent: {
       type: String,
     },
-    // phone: {
-    //   type: String,
-    // },
-    // favorite: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
@@ -45,17 +37,10 @@ const addSchema = Joi.object({
     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
     .required(),
   spent: Joi.string().required(),
-  // phone: Joi.string().required(),
-  // favorite: Joi.boolean(),
 });
-
-// const updateFavoriteSchema = Joi.object({
-//   favorite: Joi.boolean().required(),
-// });
 
 const schemas = {
   addSchema,
-  // updateFavoriteSchema,
 };
 
 const Customer = model("customer", customerSchema);
