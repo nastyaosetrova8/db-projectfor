@@ -70,7 +70,8 @@ const deleteById = async (req, res, next) => {
   if (!result) {
     throw HttpError(404, "Not found");
   }
-  res.status(200).json({ message: "product deleted" });
+  // res.status(200).json({ message: "product deleted" });
+  res.status(200).json(result);
 };
 
 module.exports = {
