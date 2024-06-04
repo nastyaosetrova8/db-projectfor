@@ -72,6 +72,7 @@ const deleteById = async (req, res, next) => {
   }
   // res.status(200).json({ message: "product deleted" });
   res.status(200).json(result);
+  // res.json(result);
 };
 
 module.exports = {
