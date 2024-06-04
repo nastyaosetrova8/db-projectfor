@@ -1,12 +1,12 @@
 ## This is the database for the project Projectfor-biz
 
-Link to the project: (https://github.com/nastyaosetrova8/projectfor-biz)
+Link to the project repository: https://github.com/nastyaosetrova8/projectfor-biz
 
 ### The back-end part is created on Node.js and deployed on Render.com hosting.
 
 ## Technologies
 
-Node.js
+Node.js,
 MongoDb
 
 # Команди:
