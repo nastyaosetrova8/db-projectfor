@@ -2,16 +2,22 @@ const { Customer } = require("../models/customer");
 const { HttpError, ctrlWrapper } = require("../helpers");
 
 const getAll = async (req, res, next) => {
-  const { _id: owner } = req.user;
-  const recentCustomers = await Customer.find()
-    .limit(5)
-    .sort({ createdAt: -1 });
-  const total = await Customer.countDocuments();
-  const customers = await Customer.find(
-    { owner },
-    "-createdAt -updatedAt"
-  ).populate("owner", "name email");
-  res.json({ customers, recentCustomers, total });
+  try {
+    // const { _id: owner } = req.user;
+    const recentCustomers = await Customer.find()
+      .limit(5)
+      .sort({ createdAt: -1 });
+    const total = await Customer.countDocuments();
+    const customers = await Customer.find(
+      // {owner},
+      {},
+      "-createdAt -updatedAt"
+    ).populate("owner", "name email");
+    // "owner",
+    res.status(200).json({ customers, recentCustomers, total });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 };
 
 const getById = async (req, res, next) => {
@@ -20,6 +26,7 @@ const getById = async (req, res, next) => {
   if (!result) {
     throw HttpError(404, "Not found");
   }
+  console.log(result);
   res.json(result);
 };
 
